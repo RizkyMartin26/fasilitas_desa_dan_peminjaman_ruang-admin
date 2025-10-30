@@ -9,3 +9,27 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+/* Floating WhatsApp Button */
+.whatsapp-float {
+  position: fixed;
+  width: 100px;
+  height: 85px;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 45px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+.whatsapp-float i {
+  line-height: 75px; /* sesuaikan dengan height tombol */
+}
+
+.whatsapp-float:hover {
+  background-color: #20b857;
+  transform: scale(1.1);
+}
