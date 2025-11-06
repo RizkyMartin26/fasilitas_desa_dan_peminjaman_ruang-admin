@@ -1,3 +1,6 @@
+@extends('layouts.admin.app')
+
+@section('content')
 <h2>Daftar Syarat Fasilitas</h2>
 <a href="{{ route('admin.syarat.create') }}">+ Tambah Syarat</a>
 

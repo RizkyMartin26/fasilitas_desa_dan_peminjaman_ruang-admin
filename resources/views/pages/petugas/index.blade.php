@@ -1,3 +1,6 @@
+@extends('layouts.admin.app')
+
+@section('content')
 <h2>Daftar Petugas Fasilitas</h2>
 <a href="{{ route('admin.petugas.create') }}">+ Tambah Data</a>
 
