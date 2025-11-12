@@ -18,8 +18,15 @@ Route::resource('warga', WargaController::class);
 Route::get('/', function () {
     return view('pages/auth/login-form');
 });
+
+// Halaman login
 Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
-Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+
+// Halaman register
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+
 
 //Dahboard
 

@@ -17,12 +17,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5 col-sm-12 mx-auto">
-                    <div class="card pt-4">
+                    <div class="card pt-4 shadow-lg border-0 rounded-4">
                         <div class="card-body">
 
                             <div class="text-center mb-4">
                                 <img src="{{ asset('assets-admin/images/favicon.svg') }}" height="60" class="mb-3">
-                                <h3 class="text-success">Login Admin<br>Bina Desa</h3>
+                                <h3 class="text-success fw-bold">Login Admin<br>Bina Desa</h3>
                                 <p>Silahkan login untuk melanjutkan</p>
                             </div>
 
@@ -34,30 +34,38 @@
                                 @csrf
 
                                 <div class="form-group position-relative has-icon-left mb-3">
-                                    <label for="username">Username</label>
-                                    <input type="text" name="username" class="form-control" value="{{ old('username') }}" required>
+                                    <label for="email" class="fw-semibold">Email</label>
+                                    <input type="text" name="email" class="form-control" value="{{ old('username') }}" required>
                                     <div class="form-control-icon">
                                         <i data-feather="user"></i>
                                     </div>
                                     @error('username')
-                                      <small class="text-danger">{{ $message }}</small>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
                                 <div class="form-group position-relative has-icon-left mb-3">
-                                    <label for="password">Password</label>
+                                    <label for="password" class="fw-semibold">Password</label>
                                     <input type="password" name="password" class="form-control" required>
                                     <div class="form-control-icon">
                                         <i data-feather="lock"></i>
                                     </div>
                                     @error('password')
-                                      <small class="text-danger">{{ $message }}</small>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
 
                                 <button type="submit" class="btn btn-success w-100 mt-3">
                                     Masuk
                                 </button>
+
+                                <!-- Tombol Register -->
+                                <div class="text-center mt-3">
+                                    <p class="mb-1">Belum punya akun?</p>
+                                    <a href="{{ route('register') }}" class="btn btn-outline-success w-100">
+                                        Daftar Sekarang
+                                    </a>
+                                </div>
                             </form>
 
                         </div>
