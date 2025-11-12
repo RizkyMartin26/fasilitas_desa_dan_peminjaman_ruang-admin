@@ -9,6 +9,7 @@
 <body>
     <div id="app">
         <div id="sidebar" class="active">
+            @include('layouts.admin.wa')
             <div class="sidebar-wrapper active">
                 @include('layouts.admin.sidebar')
             </div>
