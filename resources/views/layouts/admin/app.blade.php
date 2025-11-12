@@ -4,7 +4,6 @@
 
 <body>
     <div id="app">
-        @include('layouts.admin.navbar')
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
                 @include('layouts.admin.sidebar')
