@@ -11,7 +11,7 @@
                 <li class="sidebar-title">Contoh Admin:</li>
 
                 <!-- Dashboard -->
-                <li class="sidebar-item active">
+                <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <a href="{{ route('admin.dashboard') }}" class="sidebar-link">
                         <i data-feather="home" width="20"></i>
                         <span>Dashboard</span>
@@ -19,17 +19,24 @@
                 </li>
 
                 <!-- Master Data -->
-                <li class="sidebar-item has-sub">
+                <li class="sidebar-item has-sub
+                    {{ request()->routeIs('fasilitas.*') || request()->routeIs('warga.*') ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
                         <i data-feather="database" width="20"></i>
                         <span>Master Data</span>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{{ route('fasilitas.index') }}">Fasilitas Umum</a>
+                            <a href="{{ route('fasilitas.index') }}"
+                               class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
+                               Fasilitas Umum
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('warga.index') }}">Warga</a>
+                            <a href="{{ route('warga.index') }}"
+                               class="{{ request()->routeIs('warga.*') ? 'active' : '' }}">
+                               Warga
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -41,12 +48,8 @@
                         <span>Fitur Utama</span>
                     </a>
                     <ul class="submenu">
-                        <li>
-                            <a href="">Modul A</a>
-                        </li>
-                        <li>
-                            <a href="">Modul B</a>
-                        </li>
+                        <li><a href="#">Modul A</a></li>
+                        <li><a href="#">Modul B</a></li>
                     </ul>
                 </li>
 
