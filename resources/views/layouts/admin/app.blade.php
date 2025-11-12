@@ -12,6 +12,7 @@
             @include('layouts.admin.wa')
             <div class="sidebar-wrapper active">
                 @include('layouts.admin.sidebar')
+                @include('layouts.admin.navbar')
             </div>
         </div>
         <div class="main-content container-fluid">

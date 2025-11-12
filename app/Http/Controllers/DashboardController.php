@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Warga;
 
 class DashboardController extends Controller
 {
@@ -11,7 +12,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin-dashboard');
+        $jumlahWarga = Warga::count();
+        return view('pages.admin-dashboard', compact('jumlahWarga'));
+
+
     }
 
     /**

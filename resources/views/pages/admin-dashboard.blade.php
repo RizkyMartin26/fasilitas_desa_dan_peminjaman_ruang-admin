@@ -5,99 +5,42 @@
     <body>
         <div id="app">
             <div id="main">
-                <nav class="navbar navbar-header navbar-expand navbar-light">
-                    <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
-                    <button class="btn navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav d-flex align-items-center navbar-light ml-auto">
-                            <li class="dropdown nav-icon">
-                                <a href="#" data-toggle="dropdown"
-                                    class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                                    <div class="d-lg-inline-block">
-                                        <i data-feather="bell"></i>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-large">
-                                    <h6 class='py-2 px-4'>Notifications</h6>
-                                    <ul class="list-group rounded-none">
-                                        <li class="list-group-item border-0 align-items-start">
-                                            <div class="avatar bg-success mr-3">
-                                                <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
-                                            </div>
-                                            <div>
-                                                <h6 class='text-bold'>New Order</h6>
-                                                <p class='text-xs'>
-                                                    An order made by Ahmad Saugi for product Samsung Galaxy S69
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="dropdown nav-icon mr-2">
-                                <a href="#" data-toggle="dropdown"
-                                    class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                                    <div class="d-lg-inline-block">
-                                        <i data-feather="mail"></i>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                    <a class="dropdown-item active" href="#"><i data-feather="mail"></i>
-                                        Messages</a>
-                                    <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" data-toggle="dropdown"
-                                    class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                                    <div class="avatar mr-1">
-                                        <img src="{{ asset('assets-admin/images/avatar/avatar-s-1.png') }}" alt=""
-                                            srcset="">
-                                    </div>
-                                    <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                    <a class="dropdown-item active" href="#"><i data-feather="mail"></i>
-                                        Messages</a>
-                                    <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+
 
                 <div class="main-content container-fluid">
                     <div class="page-title">
-                        <h3>Dashboard</h3>
-                        <p class="text-subtitle text-muted">A good dashboard to display your statistics</p>
+                        <h3 style="font-size: 22px; font-weight: 600; color: #000000; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #0d6efd; padding-left: 10px;">Dashboard</h3>
+                        <br>
+                        <h4
+                            style="font-size: 18px; font-weight: 600; color: #0d6efd; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #0d6efd; padding-left: 10px;">
+                            Daftar Peminjaman Ruang Desa
+                        </h4>
+                        <p class="text-subtitle text-muted">Website ini dirancang untuk memudahkan masyarakat dalam melakukan
+                            peminjaman fasilitas dan ruang publik milik desa, seperti aula pertemuan, lapangan, gedung
+                            serbaguna, serta perlengkapan kegiatan masyarakat.</p>
                     </div>
                     <section class="section">
                         <div class="row mb-2">
                             <div class="col-12 col-md-3">
                                 <div class="card card-statistic">
-                                    {{-- <div class="card-body p-0">
-                                    <div class="d-flex flex-column">
-                                        <div class='px-3 py-3 d-flex justify-content-between'>
-                                            <h3 class='card-title'>BALANCE</h3>
-                                            <div class="card-right d-flex align-items-center">
-                                                <p>$50 </p>
+                                    <div class="card-body p-0">
+                                        <div class="d-flex flex-column">
+                                            <div class='px-3 py-3 d-flex justify-content-between align-items-center'>
+                                                <h3 class='card-title mb-0'>
+                                                    <i class="fa-solid fa-users me-2 text-blue"></i> JUMLAH WARGA
+                                                </h3>
+                                                <div class="card-right d-flex align-items-center">
+                                                    <p class="fs-3 fw-bold text-black mb-0">
+                                                        {{ $jumlahWarga }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="chart-wrapper">
+                                                <canvas id="canvas1" style="height:100px !important"></canvas>
                                             </div>
                                         </div>
-                                        <div class="chart-wrapper">
-                                            <canvas id="canvas1" style="height:100px !important"></canvas>
-                                        </div>
                                     </div>
-                                </div> --}}
                                 </div>
                             </div>
 
@@ -222,92 +165,90 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="card ">
-                                        <div class="card-header">
-                                            <h4>Your Earnings</h4>
+                                    <div class="card text-center shadow-sm">
+                                        <div class="card-header bg-primary text-white">
+                                            <h4><i class="fa-solid fa-clock me-2"></i>Waktu Sekarang</h4>
                                         </div>
                                         <div class="card-body">
-                                            <div id="radialBars"></div>
-                                            <div class="text-center mb-5">
-                                                <h6>From last month</h6>
-                                                <h1 class='text-green'>+$2,134</h1>
-                                            </div>
+                                            <div id="clock" class="display-4 fw-bold text-dark mb-3"></div>
+                                            <h6 class="text-muted">Zona Waktu: WIB</h6>
                                         </div>
                                     </div>
-                                    <div class="card widget-todo">
+
+                                    <div class="card widget-todo mt-4">
                                         <div
                                             class="card-header border-bottom d-flex justify-content-between align-items-center">
-                                            <h4 class="card-title d-flex">
-                                                <i class='bx bx-check font-medium-5 pl-25 pr-75'></i>Progress
+                                            <h4 class="card-title d-flex align-items-center">
+                                                <i class="fa-solid fa-list-check me-2 text-primary"></i>Progress
                                             </h4>
-
                                         </div>
                                         <div class="card-body px-0 py-1">
-                                            <table class='table table-borderless'>
+                                            <table class="table table-borderless">
                                                 <tr>
-                                                    <td class='col-3'>UI Design</td>
-                                                    <td class='col-6'>
+                                                    <td class="col-3">UI Design</td>
+                                                    <td class="col-6">
                                                         <div class="progress progress-info">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 60%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100">
-                                                            </div>
+                                                            <div class="progress-bar" style="width: 60%"></div>
                                                         </div>
                                                     </td>
-                                                    <td class='col-3 text-center'>60%</td>
+                                                    <td class="col-3 text-center">60%</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class='col-3'>VueJS</td>
-                                                    <td class='col-6'>
+                                                    <td class="col-3">VueJS</td>
+                                                    <td class="col-6">
                                                         <div class="progress progress-success">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 35%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100">
-                                                            </div>
+                                                            <div class="progress-bar" style="width: 35%"></div>
                                                         </div>
                                                     </td>
-                                                    <td class='col-3 text-center'>30%</td>
+                                                    <td class="col-3 text-center">35%</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class='col-3'>Laravel</td>
-                                                    <td class='col-6'>
+                                                    <td class="col-3">Laravel</td>
+                                                    <td class="col-6">
                                                         <div class="progress progress-danger">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 50%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100">
-                                                            </div>
+                                                            <div class="progress-bar" style="width: 50%"></div>
                                                         </div>
                                                     </td>
-                                                    <td class='col-3 text-center'>50%</td>
+                                                    <td class="col-3 text-center">50%</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class='col-3'>ReactJS</td>
-                                                    <td class='col-6'>
+                                                    <td class="col-3">ReactJS</td>
+                                                    <td class="col-6">
                                                         <div class="progress progress-primary">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 80%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100">
-                                                            </div>
+                                                            <div class="progress-bar" style="width: 80%"></div>
                                                         </div>
                                                     </td>
-                                                    <td class='col-3 text-center'>80%</td>
+                                                    <td class="col-3 text-center">80%</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class='col-3'>Go</td>
-                                                    <td class='col-6'>
+                                                    <td class="col-3">Go</td>
+                                                    <td class="col-6">
                                                         <div class="progress progress-secondary">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                style="width: 65%" aria-valuenow="0" aria-valuemin="0"
-                                                                aria-valuemax="100">
-                                                            </div>
+                                                            <div class="progress-bar" style="width: 65%"></div>
                                                         </div>
                                                     </td>
-                                                    <td class='col-3 text-center'>65%</td>
+                                                    <td class="col-3 text-center">65%</td>
                                                 </tr>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
+
+                                <script>
+                                    // Fungsi untuk menampilkan jam real-time
+                                    function updateClock() {
+                                        const now = new Date();
+                                        const hours = now.getHours().toString().padStart(2, '0');
+                                        const minutes = now.getMinutes().toString().padStart(2, '0');
+                                        const seconds = now.getSeconds().toString().padStart(2, '0');
+                                        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+                                    }
+
+                                    // Update setiap detik
+                                    setInterval(updateClock, 1000);
+                                    updateClock();
+                                </script>
+
                             </div>
                     </section>
                 </div>
