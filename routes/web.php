@@ -18,14 +18,6 @@ Route::resource('warga', WargaController::class);
 Route::get('/', function () {
     return view('pages/auth/login-form');
 });
-Route::resource('/admin/fasilitas', FasilitasController::class)->names([
-    'index' => 'fasilitas.index',
-    'create' => 'fasilitas.create',
-    'store' => 'fasilitas.store',
-    'edit' => 'fasilitas.edit',
-    'update' => 'fasilitas.update',
-    'destroy' => 'fasilitas.destroy',
-]);
 Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
 Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
 
@@ -33,6 +25,7 @@ Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login')
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+Route::resource('fasilitas', FasilitasController::class);
 Route::resource('/warga', WargaController::class);
 Route::resource('warga', WargaController::class);
 Route::prefix('admin')->name('admin.')->group(function () {

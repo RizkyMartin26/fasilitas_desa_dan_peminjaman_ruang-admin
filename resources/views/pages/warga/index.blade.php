@@ -73,11 +73,11 @@
     <div class="card card-warga">
         <div class="card-header-blue d-flex justify-content-between align-items-center flex-wrap">
             <div>
-                <h4>Data Warga</h4>
+                <h4><i class="fa-solid fa-users"></i> Data Warga</h4>
                 <small>Kelola data warga dengan mudah dan cepat</small>
             </div>
             <a href="{{ route('warga.create') }}" class="btn btn-add btn-sm mt-2 mt-md-0">
-                <i class="bi bi-person-plus"></i> Tambah Warga
+                <i class="fa-solid fa-user-plus"></i> Tambah Warga
             </a>
         </div>
 
@@ -88,7 +88,7 @@
                         <input type="text" name="q" value="{{ request('q') }}" class="form-control form-control-sm"
                                placeholder="Cari nama, no KTP, pekerjaan...">
                         <button class="btn btn-primary btn-sm ms-2" type="submit">
-                            <i class="bi bi-search"></i> Cari
+                            <i class="fa-solid fa-magnifying-glass"></i> Cari
                         </button>
                     </form>
                 </div>
@@ -98,13 +98,13 @@
                 <table class="table table-striped table-hover table-custom align-middle">
                     <thead>
                         <tr>
-                            <th style="width:60px">No</th>
-                            <th>No KTP</th>
-                            <th>Nama</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Agama</th>
-                            <th>Pekerjaan</th>
-                            <th class="text-center" style="width:150px">Aksi</th>
+                            <th style="width:60px"><i class="fa-solid fa-list-ol"></i> No</th>
+                            <th><i class="fa-solid fa-id-card"></i> No KTP</th>
+                            <th><i class="fa-solid fa-user"></i> Nama</th>
+                            <th><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</th>
+                            <th><i class="fa-solid fa-mosque"></i> Agama</th>
+                            <th><i class="fa-solid fa-briefcase"></i> Pekerjaan</th>
+                            <th class="text-center" style="width:150px"><i class="fa-solid fa-gear"></i> Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,14 +121,14 @@
                             <td>{{ $item->agama }}</td>
                             <td>{{ $item->pekerjaan }}</td>
                             <td class="text-center">
-                                <a href="{{ route('warga.edit', $item->warga_id) }}" class="btn btn-outline-primary btn-sm me-1">
-                                    <i class="bi bi-pencil"></i>
+                                <a href="{{ route('warga.edit', $item->warga_id) }}" class="btn btn-outline-primary btn-sm me-1" title="Edit Data">
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST" class="d-inline form-delete">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm btn-delete">
-                                        <i class="bi bi-trash"></i>
+                                    <button type="button" class="btn btn-danger btn-sm btn-delete" title="Hapus Data">
+                                        <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
                             </td>
@@ -136,7 +136,8 @@
                         @empty
                         <tr>
                             <td colspan="7" class="text-center empty-state py-4">
-                                Belum ada data warga. <a href="{{ route('warga.create') }}">Tambah warga baru</a>
+                                <i class="fa-solid fa-circle-exclamation"></i> Belum ada data warga.
+                                <a href="{{ route('warga.create') }}">Tambah warga baru</a>
                             </td>
                         </tr>
                         @endforelse
@@ -195,6 +196,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
 </script>
 @endsection

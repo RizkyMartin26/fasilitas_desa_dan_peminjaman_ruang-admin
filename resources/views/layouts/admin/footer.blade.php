@@ -3,9 +3,5 @@
          <div class="float-left">
              <p>2020 &copy; Voler</p>
          </div>
-         <div class="float-right">
-             <p>Crafted with <span class='text-danger'><i data-feather="heart"></i></span> by <a
-                     href="http://ahmadsaugi.com">Ahmad Saugi</a></p>
-         </div>
      </div>
  </footer>

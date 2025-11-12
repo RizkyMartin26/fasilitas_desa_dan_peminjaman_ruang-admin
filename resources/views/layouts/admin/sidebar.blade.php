@@ -1,7 +1,7 @@
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
-        <div class="sidebar-header">
-            <img src="{{ asset('assets-admin/images/logo.svg') }}" alt="Logo">
+        <div class="sidebar-header text-center py-3">
+            <span class="fw-semibold text-black fs-5">Bina Desa</span>
         </div>
 
         <div class="sidebar-menu">
@@ -26,7 +26,7 @@
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="">User</a>
+                            <a href="{{ route('fasilitas.index') }}">Fasilitas Umum</a>
                         </li>
                         <li>
                             <a href="{{ route('warga.index') }}">Warga</a>

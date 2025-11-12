@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Tambah Data Warga')
+@extends('layouts.admin.app')
 
 @section('content')
 <style>
@@ -29,9 +27,11 @@
 <div class="container mt-5">
     <div class="card card-form">
         <div class="card-header-blue d-flex justify-content-between align-items-center">
-            <h4 class="mb-0"><i class="bi bi-person-plus"></i> Tambah Warga</h4>
+            <h4 class="mb-0">
+                <i class="fa-solid fa-user-plus me-2"></i> Tambah Warga
+            </h4>
             <a href="{{ route('warga.index') }}" class="btn btn-light btn-sm">
-                <i class="bi bi-arrow-left"></i> Kembali
+                <i class="fa-solid fa-arrow-left me-1"></i> Kembali
             </a>
         </div>
 
@@ -40,42 +40,62 @@
                 @csrf
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">No KTP</label>
+                        <label class="form-label fw-semibold">
+                            <i class="fa-regular fa-id-card me-1"></i> No KTP
+                        </label>
                         <input type="text" name="no_ktp" class="form-control" required>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Nama</label>
+                        <label class="form-label fw-semibold">
+                            <i class="fa-solid fa-user me-1"></i> Nama
+                        </label>
                         <input type="text" name="nama" class="form-control" required>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Jenis Kelamin</label>
+                        <label class="form-label fw-semibold">
+                            <i class="fa-solid fa-venus-mars me-1"></i> Jenis Kelamin
+                        </label>
                         <select name="jenis_kelamin" class="form-select" required>
                             <option value="">-- Pilih --</option>
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Agama</label>
+                        <label class="form-label fw-semibold">
+                            <i class="fa-solid fa-place-of-worship me-1"></i> Agama
+                        </label>
                         <input type="text" name="agama" class="form-control" required>
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Pekerjaan</label>
+                        <label class="form-label fw-semibold">
+                            <i class="fa-solid fa-briefcase me-1"></i> Pekerjaan
+                        </label>
                         <input type="text" name="pekerjaan" class="form-control">
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Telepon</label>
+                        <label class="form-label fw-semibold">
+                            <i class="fa-solid fa-phone me-1"></i> Telepon
+                        </label>
                         <input type="text" name="telp" class="form-control">
                     </div>
+
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Email</label>
+                        <label class="form-label fw-semibold">
+                            <i class="fa-solid fa-envelope me-1"></i> Email
+                        </label>
                         <input type="email" name="email" class="form-control">
                     </div>
                 </div>
 
                 <div class="mt-4 text-end">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save"></i> Simpan
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Simpan
                     </button>
                 </div>
             </form>
@@ -96,4 +116,3 @@ Swal.fire({
 </script>
 @endif
 @endsection
-

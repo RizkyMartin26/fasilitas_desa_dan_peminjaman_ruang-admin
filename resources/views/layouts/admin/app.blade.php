@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('layouts.admin.header')
+
+<head>
+    @include('layouts.admin.header')
+</head>
+
 
 <body>
     <div id="app">
