@@ -15,8 +15,8 @@ use App\Http\Controllers\Admin\PembayaranFasilitasController;
 
 Route::resource('warga', WargaController::class);
 
-Route::get('/we', function () {
-    return view('welcome');
+Route::get('/', function () {
+    return view('pages/auth/login-form');
 });
 Route::resource('/admin/fasilitas', FasilitasController::class)->names([
     'index' => 'fasilitas.index',
