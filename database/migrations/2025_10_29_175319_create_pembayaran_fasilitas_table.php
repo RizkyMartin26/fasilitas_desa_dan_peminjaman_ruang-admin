@@ -10,7 +10,7 @@ class CreatePembayaranFasilitasTable extends Migration
     {
         Schema::create('pembayaran_fasilitas', function (Blueprint $table) {
             $table->id('bayar_id');
-            $table->unsignedBigInteger('pinjam_id');
+            $table->unsignedBigInteger('peminjaman_id');
             $table->date('tanggal');
             $table->decimal('jumlah', 10, 2);
             $table->string('metode');
@@ -18,8 +18,8 @@ class CreatePembayaranFasilitasTable extends Migration
             $table->string('bukti_bayar')->nullable(); // media
             $table->timestamps();
 
-            $table->foreign('pinjam_id')
-                ->references('pinjam_id')
+            $table->foreign('peminjaman_id')
+                ->references('peminjaman_id')
                 ->on('peminjaman_fasilitas')
                 ->onDelete('cascade');
         });

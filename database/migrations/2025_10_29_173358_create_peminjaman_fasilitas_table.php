@@ -18,7 +18,7 @@ return new class extends Migration {
 
             // Foreign key
             $table->foreign('warga_id')->references('warga_id')->on('warga')->onDelete('cascade');
-            $table->foreign('fasilitas_id')->references('fasilitas_id')->on('fasilitas')->onDelete('cascade');
+            $table->foreign('fasilitas_id')->references('fasilitas_id')->on('fasilitas_umum')->onDelete('cascade');
         });
     }
 
