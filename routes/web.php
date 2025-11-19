@@ -10,7 +10,7 @@ use App\Http\Controllers\PeminjamanFasilitasController;
 use App\Http\Controllers\Admin\SyaratFasilitasController;
 use App\Http\Controllers\Admin\PetugasFasilitasController;
 use App\Http\Controllers\Admin\PembayaranFasilitasController;
-
+use App\Http\Controllers\PeminjamanController;
 
 
 Route::resource('warga', WargaController::class);
@@ -48,3 +48,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('petugas', PetugasFasilitasController::class);
 });
 Route::resource('petugas', PetugasController::class);
+
+
+Route::resource('peminjaman', PeminjamanController::class);

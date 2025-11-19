@@ -1,19 +1,22 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class PeminjamanFasilitas extends Model
 {
-    protected $table = 'peminjaman_fasilitas';
-    protected $primaryKey = 'peminjaman_id';
-    protected $fillable = [
+    protected $_table      = 'peminjaman_fasilitas';
+    protected $_primaryKey = 'peminjaman_id';
+    public $incrementing  = true;
+
+    protected $_fillable = [
         'warga_id',
         'fasilitas_id',
         'tgl_pinjam',
         'tgl_kembali',
-        'status'
+        'tujuan',
+        'status',
+        'total_biaya',
     ];
 
     public function warga()
@@ -23,6 +26,6 @@ class PeminjamanFasilitas extends Model
 
     public function fasilitas()
     {
-        return $this->belongsTo(Fasilitas::class, 'fasilitas_id');
+        return $this->belongsTo(FasilitasUmum::class, 'fasilitas_id');
     }
 }

@@ -1,19 +1,19 @@
-@extends('layouts.admin')
+@extends('layouts.admin.app')
 
 @section('content')
-    <h3>Edit Peminjaman</h3>
+<h3>Edit Peminjaman</h3>
 
-    <form action="{{ route('admin.peminjaman.update', $data->peminjaman_id) }}" method="POST">
-        @csrf
-        @method('PUT')
+<form action="{{ route('admin.peminjaman.update', $data->peminjaman_id) }}" method="POST">
+    @csrf
+    @method('PUT')
 
-        <label>Status</label>
-        <select name="status" class="form-control">
-            <option value="pending" @selected($data->status == 'pending')>Pending</option>
-            <option value="setuju" @selected($data->status == 'setuju')>Setuju</option>
-            <option value="tolak" @selected($data->status == 'tolak')>Tolak</option>
-        </select>
+    <label>Status</label>
+    <select name="status" class="form-control">
+        <option value="pending" @selected($data->status == 'pending')>Pending</option>
+        <option value="setuju" @selected($data->status == 'setuju')>Setuju</option>
+        <option value="tolak" @selected($data->status == 'tolak')>Tolak</option>
+    </select>
 
-        <button class="btn btn-primary mt-3">Update</button>
-    </form>
+    <button class="btn btn-primary mt-3">Update</button>
+</form>
 @endsection

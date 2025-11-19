@@ -19,7 +19,8 @@
                 </li>
 
                 <!-- Master Data -->
-                <li class="sidebar-item has-sub
+                <li
+                    class="sidebar-item has-sub
                     {{ request()->routeIs('fasilitas.*') || request()->routeIs('warga.*') ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
                         <i data-feather="database" width="20"></i>
@@ -28,14 +29,20 @@
                     <ul class="submenu">
                         <li>
                             <a href="{{ route('fasilitas.index') }}"
-                               class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
-                               Fasilitas Umum
+                                class="{{ request()->routeIs('fasilitas.*') ? 'active' : '' }}">
+                                Fasilitas Umum
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('peminjaman.index') }}"
+                                class="{{ request()->routeIs('peminjaman.*') ? 'active' : '' }}">
+                                Peminjaman Fasilitas
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('warga.index') }}"
-                               class="{{ request()->routeIs('warga.*') ? 'active' : '' }}">
-                               Warga
+                                class="{{ request()->routeIs('warga.*') ? 'active' : '' }}">
+                                Warga
                             </a>
                         </li>
                     </ul>

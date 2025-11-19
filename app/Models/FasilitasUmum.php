@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class FasilitasUmum extends Model
 {
-    use HasFactory;
-
-    protected $table = 'fasilitas_umum';
+    protected $table = 'fasilitas_umum';   // ← WAJIB TAMBAHKAN INI
     protected $primaryKey = 'fasilitas_id';
 
     protected $fillable = [
@@ -20,6 +17,6 @@ class FasilitasUmum extends Model
         'rw',
         'kapasitas',
         'deskripsi',
-        'media'
+        'media',
     ];
 }

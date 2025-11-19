@@ -13,10 +13,11 @@ return new class extends Migration {
             $table->unsignedBigInteger('fasilitas_id');
             $table->dateTime('tgl_pinjam');
             $table->dateTime('tgl_kembali')->nullable();
+            $table->string('tujuan')->nullable();
             $table->enum('status', ['pending', 'setuju', 'tolak'])->default('pending');
+            $table->integer('total_biaya')->nullable();
             $table->timestamps();
 
-            // Foreign key
             $table->foreign('warga_id')->references('warga_id')->on('warga')->onDelete('cascade');
             $table->foreign('fasilitas_id')->references('fasilitas_id')->on('fasilitas_umum')->onDelete('cascade');
         });

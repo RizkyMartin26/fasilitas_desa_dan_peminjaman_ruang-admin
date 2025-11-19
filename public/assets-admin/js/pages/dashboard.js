@@ -31,7 +31,7 @@ var config1 = {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false, 
+    maintainAspectRatio: false,
     layout: {
       padding: {
         left: -10,
@@ -236,7 +236,7 @@ var config4 = {
   },
   options: {
     responsive: true,
-    maintainAspectRatio: false, 
+    maintainAspectRatio: false,
     layout: {
       padding: {
         left: -10,
@@ -300,7 +300,7 @@ Chart.helpers.drawRoundedTopRectangle = function(ctx, x, y, width, height, radiu
   ctx.lineTo(x + width, y + height);
   // bottom left corner
   ctx.lineTo(x, y + height);
-  // top left	
+  // top left
   ctx.lineTo(x, y + radius);
   ctx.quadraticCurveTo(x, y, x + radius, y);
   ctx.closePath();
@@ -361,10 +361,10 @@ Chart.elements.RoundedTopRectangle = Chart.elements.Rectangle.extend({
     var barWidth = Math.abs(left - right);
     var roundness = this._chart.config.options.barRoundness || 0.5;
     var radius = barWidth * roundness * 0.5;
-    
+
     // keep track of the original top of the bar
     var prevTop = top;
-    
+
     // move the top down so there is room to draw the rounded top
     top = prevTop + radius;
     var barRadius = top - prevTop;
@@ -402,13 +402,13 @@ var myBar = new Chart(ctxBar, {
       label: 'Students',
       backgroundColor: [chartColors.grey, chartColors.grey, chartColors.grey, chartColors.grey, chartColors.info, chartColors.blue, chartColors.grey],
       data: [
-        5, 
-        10, 
-        30, 
-        40, 
-        35, 
-        55, 
-        15, 
+        5,
+        10,
+        30,
+        40,
+        35,
+        55,
+        15,
       ]
     }]
   },
