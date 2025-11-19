@@ -16,11 +16,14 @@
             </div>
         </div>
         <div class="main-content container-fluid">
-            @yield('content')
+            <div id="app">
+                <div id="main">
+                    @yield('content')
+                </div>
+            </div>
+            @include('layouts.admin.footer')
+            @include('layouts.admin.script')
         </div>
-        @include('layouts.admin.footer')
-        @include('layouts.admin.script')
-    </div>
     </div>
 </body>
 
