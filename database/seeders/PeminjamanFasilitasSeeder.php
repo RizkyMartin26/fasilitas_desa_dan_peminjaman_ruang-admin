@@ -1,34 +1,48 @@
 <?php
+
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+use App\Models\Warga;
 use App\Models\FasilitasUmum;
 use App\Models\PeminjamanFasilitas;
-use App\Models\Warga;
-use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class PeminjamanFasilitasSeeder extends Seeder
 {
     public function run(): void
     {
-        $warga     = Warga::all();
-        $fasilitas = FasilitasUmum::all();
+        $faker = Faker::create('id_ID');
 
-        if ($warga->count() == 0 || $fasilitas->count() == 0) {
-            return;
+        $wargaIds     = Warga::pluck('warga_id')->toArray();
+        $fasilitasIds = FasilitasUmum::pluck('fasilitas_id')->toArray();
+
+        // Jika tabel warga atau fasilitas kosong → hentikan
+        if (empty($wargaIds) || empty($fasilitasIds)) {
+            dd("Seeder GAGAL: pastikan seeder Warga dan Fasilitas sudah dijalankan.");
         }
 
-        for ($i = 0; $i < 100; $i++) {
-            $tglPinjam  = now()->subDays(rand(1, 15));
-            $tglKembali = rand(0, 1) ? $tglPinjam->copy()->addDays(rand(1, 14)) : null;
+        for ($i = 1; $i <= 100; $i++) {
+
+            // Waktu pinjam random 1–30 hari lalu
+            $tglPinjam = $faker->dateTimeBetween('-30 days', 'now');
+
+            // Waktu kembali 1–3 hari setelah pinjam
+            $tglKembali = (clone $tglPinjam)->modify('+' . rand(1, 3) . ' days');
 
             PeminjamanFasilitas::create([
-                'warga_id'     => $warga->random()->warga_id,
-                'fasilitas_id' => $fasilitas->random()->fasilitas_id,
-                'tgl_pinjam'   => $tglPinjam,
-                'tgl_kembali'  => $tglKembali,
-                'tujuan'       => 'Keperluan warga',
-                'status'       => ['pending', 'setuju', 'tolak'][rand(0, 2)],
-                'total_biaya'  => rand(10000, 100000),
+                'warga_id'      => $faker->randomElement($wargaIds),
+                'fasilitas_id'  => $faker->randomElement($fasilitasIds),
+
+                'tgl_pinjam'    => $tglPinjam,
+                'tgl_kembali'   => $tglKembali,
+
+                'tujuan'        => $faker->sentence(6),
+
+                'status'        => $faker->randomElement(['pending', 'setuju', 'tolak']),
+
+                // total biaya dinamis
+                'total_biaya'   => rand(50000, 500000), // 50k – 500k
             ]);
         }
     }

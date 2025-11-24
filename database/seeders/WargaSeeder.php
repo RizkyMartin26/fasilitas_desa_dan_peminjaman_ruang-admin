@@ -1,46 +1,51 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 class WargaSeeder extends Seeder
 {
     public function run(): void
     {
-        $agama     = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu'];
-        $pekerjaan = [
-            'Karyawan Swasta', 'Wiraswasta', 'PNS', 'Mahasiswa',
-            'Buruh', 'Ibu Rumah Tangga', 'Guru', 'Perawat',
-            'Driver', 'Petani', 'Nelayan', 'Security',
-        ];
-        $namaDepanL    = ['Budi', 'Andi', 'Rizki', 'Doni', 'Fajar', 'Hendra', 'Joko', 'Reza', 'Bagus', 'Taufik'];
-        $namaBelakangL = ['Saputra', 'Pratama', 'Firmansyah', 'Wijaya', 'Kurniawan', 'Setiawan'];
+        $faker = Faker::create('id_ID'); // 🔥 faker Indonesia
 
-        $namaDepanP    = ['Siti', 'Ayu', 'Rina', 'Dewi', 'Putri', 'Lestari', 'Melati', 'Nadia', 'Vina', 'Anisa'];
-        $namaBelakangP = ['Sari', 'Wulandari', 'Lestari', 'Anggraini', 'Putri', 'Kartika'];
+        $agama = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu'];
+
+        $pekerjaan = [
+            'Karyawan Swasta', 'Wiraswasta', 'PNS', 'Mahasiswa', 'Buruh',
+            'Ibu Rumah Tangga', 'Guru', 'Perawat', 'Driver',
+            'Petani', 'Nelayan', 'Security',
+        ];
 
         for ($i = 1; $i <= 100; $i++) {
 
-            $jenisKelamin = rand(0, 1) ? "Laki-laki" : "Perempuan";
+            $jenisKelamin = $faker->randomElement(['Laki-laki', 'Perempuan']);
 
-            if ($jenisKelamin === "Laki-laki") {
-                $nama = $namaDepanL[array_rand($namaDepanL)] . ' ' .
-                    $namaBelakangL[array_rand($namaBelakangL)];
+            // 🔥 Nama Indonesia asli dari Faker
+            if ($jenisKelamin === 'Laki-laki') {
+                $nama = $faker->name('male');
             } else {
-                $nama = $namaDepanP[array_rand($namaDepanP)] . ' ' .
-                    $namaBelakangP[array_rand($namaBelakangP)];
+                $nama = $faker->name('female');
             }
 
             DB::table('warga')->insert([
-                'no_ktp'        => str_pad((string)rand(1000000000000000, 9999999999999999), 16, '0', STR_PAD_LEFT),
+                // 🔥 Nomor KTP 16 digit Indonesia
+                'no_ktp'        => $faker->numerify('################'),
+
                 'nama'          => $nama,
                 'jenis_kelamin' => $jenisKelamin,
-                'agama'         => $agama[array_rand($agama)],
-                'pekerjaan'     => $pekerjaan[array_rand($pekerjaan)],
-                'telp'          => '08' . rand(1000000000, 9999999999),
-                'email'         => Str::lower(str_replace(' ', '', $nama)) . rand(1, 100) . '@gmail.com',
+                'agama'         => $faker->randomElement($agama),
+                'pekerjaan'     => $faker->randomElement($pekerjaan),
+
+                // 🔥 Nomor telepon Indonesia
+                'telp'          => $faker->phoneNumber(),
+
+                // 🔥 Email otomatis dari Faker
+                'email'         => $faker->unique()->safeEmail(),
+
                 'created_at'    => now(),
                 'updated_at'    => now(),
             ]);

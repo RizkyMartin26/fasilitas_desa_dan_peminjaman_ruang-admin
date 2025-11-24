@@ -1,15 +1,16 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class PeminjamanFasilitas extends Model
 {
-    protected $_table      = 'peminjaman_fasilitas';
-    protected $_primaryKey = 'peminjaman_id';
+    protected $table      = 'peminjaman_fasilitas';
+    protected $primaryKey = 'peminjaman_id';
     public $incrementing  = true;
 
-    protected $_fillable = [
+    protected $fillable = [
         'warga_id',
         'fasilitas_id',
         'tgl_pinjam',
