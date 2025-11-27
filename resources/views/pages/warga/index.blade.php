@@ -76,103 +76,118 @@
                     <h4><i class="fa-solid fa-users"></i> Data Warga</h4>
                     <small>Kelola data warga dengan mudah dan cepat</small>
                 </div>
+                {{-- Tombol Tambah Warga --}}
                 <a href="{{ route('warga.create') }}" class="btn btn-add btn-sm mt-2 mt-md-0">
                     <i class="fa-solid fa-user-plus"></i> Tambah Warga
                 </a>
             </div>
 
             <div class="card-body">
+                {{-- Gabungan Filter, Pencarian, dan Tombol Reset --}}
+                <form method="GET" action="{{ route('warga.index') }}" class="mb-4">
+                    <div class="row g-2 align-items-center">
+                        {{-- Filter Jenis Kelamin Dropdown (Col 1) --}}
+                        <div class="col-12 col-md-3">
+                            <select name="jenis_kelamin" class="form-select form-select-sm" onchange="this.form.submit()">
+                                <option value=""> Semua Jenis Kelamin </option>
+                                <option value="Laki-laki" {{ request('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
+                                    Laki-laki
+                                </option>
+                                <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
+                                    Perempuan
+                                </option>
+                            </select>
+                        </div>
 
-                {{-- Pencarian --}}
-                <div class="row mb-3 g-2 align-items-center">
-                    <div class="col-md-6">
-                        <form method="GET" action="{{ route('warga.index') }}" class="d-flex">
-                            <input type="text" name="search" value="{{ request('search') }}"
-                                class="form-control form-control-sm" placeholder="Cari nama warga...">
+                        {{-- Search Input and Button (Col 2 & 3) --}}
+                        <div class="col-12 col-md-4">
+                            <div class="input-group input-group-sm">
+                                <input type="text" name="search" value="{{ request('search') }}" class="form-control"
+                                    placeholder="Cari nama atau No KTP...">
 
-                            <button class="btn btn-primary btn-sm ms-2" type="submit">
-                                <i class="fa-solid fa-magnifying-glass"></i> Cari
-                            </button>
-                        </form>
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i> Cari
+                                </button>
+                            </div>
+                        </div>
+
+                        {{-- Reset Button (Col 4) --}}
+                        <div class="col-12 col-md-2">
+                            @if (request('search') || request('jenis_kelamin'))
+                                <a href="{{ route('warga.index') }}"
+                                    class="btn btn-outline-secondary btn-sm w-100">Reset</a>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                </form>
 
+                {{-- Notifikasi sukses (menggunakan SweetAlert) --}}
+                {{-- SweetAlert sudah ditangani di bagian script di bawah --}}
+
+                {{-- Tabel Data --}}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-custom align-middle">
+                        <thead>
+                            <tr>
+                                <th style="width:60px"><i class="fa-solid fa-list-ol"></i> No</th>
+                                <th><i class="fa-solid fa-id-card"></i> No KTP</th>
+                                <th><i class="fa-solid fa-user"></i> Nama</th>
+                                <th><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</th>
+                                <th><i class="fa-solid fa-mosque"></i> Agama</th>
+                                <th><i class="fa-solid fa-briefcase"></i> Pekerjaan</th>
+                                <th class="text-center" style="width:150px"><i class="fa-solid fa-gear"></i> Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($data as $index => $item)
+                                <tr>
+                                    {{-- Menggunakan index paginasi yang benar --}}
+                                    <td>{{ $data->firstItem() + $index }}</td>
+                                    <td>{{ $item->no_ktp }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>
+                                        <span class="badge badge-gender rounded-pill px-3">
+                                            {{ $item->jenis_kelamin }}
+                                        </span>
+                                    </td>
+                                    <td>{{ $item->agama }}</td>
+                                    <td>{{ $item->pekerjaan }}</td>
+                                    <td class="text-center">
+                                        {{-- Tombol Edit --}}
+                                        <a href="{{ route('warga.edit', $item->warga_id) }}"
+                                            class="btn btn-outline-primary btn-sm me-1" title="Edit Data">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        {{-- Tombol Delete (dengan SweetAlert) --}}
+                                        <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
+                                            class="d-inline form-delete">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                                title="Hapus Data">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center empty-state py-4">
+                                        <i class="fa-solid fa-circle-exclamation"></i> Belum ada data warga.
+                                        <a href="{{ route('warga.create') }}">Tambah warga baru</a>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
 
                 {{-- Pagination --}}
-                <div class="d-flex justify-content-center mt-3">
-                    {{ $data->links() }}
-                </div>
-
-            </div>
-
-
-            <div class="table-responsive">
-                <table class="table table-striped table-hover table-custom align-middle">
-                    <thead>
-                        <tr>
-                            <th style="width:60px"><i class="fa-solid fa-list-ol"></i> No</th>
-                            <th><i class="fa-solid fa-id-card"></i> No KTP</th>
-                            <th><i class="fa-solid fa-user"></i> Nama</th>
-                            <th><i class="fa-solid fa-venus-mars"></i> Jenis Kelamin</th>
-                            <th><i class="fa-solid fa-mosque"></i> Agama</th>
-                            <th><i class="fa-solid fa-briefcase"></i> Pekerjaan</th>
-                            <th class="text-center" style="width:150px"><i class="fa-solid fa-gear"></i> Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($data as $index => $item)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $item->no_ktp }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>
-                                    <span class="badge badge-gender rounded-pill px-3">
-                                        {{ $item->jenis_kelamin }}
-                                    </span>
-                                </td>
-                                <td>{{ $item->agama }}</td>
-                                <td>{{ $item->pekerjaan }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('warga.edit', $item->warga_id) }}"
-                                        class="btn btn-outline-primary btn-sm me-1" title="Edit Data">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
-                                        class="d-inline form-delete">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="btn btn-danger btn-sm btn-delete" title="Hapus Data">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center empty-state py-4">
-                                    <i class="fa-solid fa-circle-exclamation"></i> Belum ada data warga.
-                                    <a href="{{ route('warga.create') }}">Tambah warga baru</a>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap">
-                <div class="text-muted small">
-                    Menampilkan {{ $data->count() }} dari
-                    {{ $data instanceof \Illuminate\Pagination\LengthAwarePaginator ? $data->total() : $data->count() }}
-                    entri
-                </div>
-                <div>
-                    @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                        {{ $data->withQueryString()->links() }}
-                    @endif
+                <div class="mt-3 d-flex justify-content-center">
+                    {{ $data->appends(request()->query())->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- SweetAlert2 -->

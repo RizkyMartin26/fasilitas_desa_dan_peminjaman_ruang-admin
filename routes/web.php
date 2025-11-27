@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 // Login
+Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
@@ -26,7 +27,9 @@ Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 
 // Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+     ->middleware('auth')
+     ->name('dashboard');
 
 
 // =====================

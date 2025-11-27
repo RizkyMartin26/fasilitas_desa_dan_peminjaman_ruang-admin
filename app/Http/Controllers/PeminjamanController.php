@@ -9,18 +9,25 @@ use Illuminate\Http\Request;
 class PeminjamanController extends Controller
 {
     public function index(Request $request)
-{
-    $data = PeminjamanFasilitas::with(['warga', 'fasilitas'])
-                ->when($request->search, function ($query) use ($request) {
-                    $query->whereHas('warga', function ($q) use ($request) {
-                        $q->where('nama', 'LIKE', '%' . $request->search . '%');
-                    });
-                })
-                ->paginate(10);
+    {
+        $data = PeminjamanFasilitas::with(['warga', 'fasilitas'])
+        // Filter berdasarkan pencarian nama warga
+            ->when($request->search, function ($query) use ($request) {
+                $query->whereHas('warga', function ($q) use ($request) {
+                    $q->where('nama', 'LIKE', '%' . $request->search . '%');
+                });
+            })
+        // BARU: Filter berdasarkan status
+            ->when($request->status, function ($query) use ($request) {
+                $query->where('status', $request->status);
+            })
+            ->paginate(10);
 
-    return view('pages.peminjaman.index', compact('data'));
-}
+        // Ini penting agar paginasi, search, dan filter status tetap berfungsi bersamaan
+        $data->appends($request->only('search', 'status'));
 
+        return view('pages.peminjaman.index', compact('data'));
+    }
 
     public function create()
     {

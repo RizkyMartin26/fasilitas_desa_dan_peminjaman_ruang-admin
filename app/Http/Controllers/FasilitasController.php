@@ -9,12 +9,24 @@ class FasilitasController extends Controller
 {
     public function index(Request $request)
     {
-        $data = FasilitasUmum::when($request->search, function ($query) use ($request) {
-            $query->where('nama', 'LIKE', '%' . $request->search . '%');
-        })
-            ->paginate(10);
+        $query = FasilitasUmum::query();
 
-        return view('pages.fasilitas.index', compact('data'));
+        // 1. FILTER BERDASARKAN JENIS
+        if ($request->filled('jenis')) {
+            $query->where('jenis', $request->jenis);
+        }
+
+        // 2. PENCARIAN BERDASARKAN NAMA
+        if ($request->filled('search')) {
+            $query->where('nama', 'LIKE', '%' . $request->search . '%');
+        }
+
+        $data = $query->paginate(10)->withQueryString();
+
+        // Ambil semua jenis unik untuk dropdown filter di view
+        $availableJenis = FasilitasUmum::select('jenis')->distinct()->pluck('jenis')->sort()->toArray();
+
+        return view('pages.fasilitas.index', compact('data', 'availableJenis'));
     }
 
     public function create()

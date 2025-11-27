@@ -7,15 +7,23 @@ use Illuminate\Http\Request;
 class WargaController extends Controller
 {
     public function index(Request $request)
-{
-    $data = Warga::when($request->search, function ($query) use ($request) {
+    {
+        $data = Warga::query()
+        // Filter berdasarkan pencarian nama
+            ->when($request->search, function ($query) use ($request) {
                 $query->where('nama', 'LIKE', '%' . $request->search . '%');
+            })
+        // BARU: Filter berdasarkan jenis kelamin
+            ->when($request->jenis_kelamin, function ($query) use ($request) {
+                $query->where('jenis_kelamin', $request->jenis_kelamin);
             })
             ->paginate(10);
 
-    return view('pages.warga.index', compact('data'));
-}
+        // Ini penting agar paginasi membawa semua parameter query (search dan jenis_kelamin)
+        $data->appends($request->only('search', 'jenis_kelamin'));
 
+        return view('pages.warga.index', compact('data'));
+    }
 
     public function create()
     {

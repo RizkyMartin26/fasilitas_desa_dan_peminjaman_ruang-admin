@@ -3,6 +3,7 @@
 
 <head>
     @include('layouts.admin.header')
+    @include('layouts.admin.css')
 </head>
 
 
