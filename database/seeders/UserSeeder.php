@@ -11,28 +11,32 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = Faker::create('id_ID'); // Faker Indonesia
+        $faker = Faker::create('id_ID');
 
         // =====================================================================
-        // 1. User Admin Utama
+        // 1. ADMIN UTAMA (ANTI DUPLIKAT)
         // =====================================================================
-        User::create([
-            'name'     => 'Administrator',
-            'email'    => 'admin@pariwisata.com',
-            'password' => Hash::make('Admin123'),
-            'role'     => 'admin',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'martin@gmail.com'], // UNIQUE KEY
+            [
+                'name'     => 'Pastor Martin PS',
+                'password' => Hash::make('martin123'),
+                'role'     => 'admin',
+            ]
+        );
 
         // =====================================================================
-        // 2. Generate 50 user fake
+        // 2. USER FAKE (ANTI DUPLIKAT EMAIL)
         // =====================================================================
-        for ($i = 1; $i <= 50; $i++) {
-            User::create([
-                'name'     => $faker->name(),
-                'email'    => $faker->unique()->safeEmail(),
-                'password' => Hash::make('Admin123'),
-                'role'     => $faker->randomElement(['admin', 'petugas']),
-            ]);
+        for ($i = 1; $i <= 10; $i++) {
+            User::updateOrCreate(
+                ['email' => $faker->unique()->safeEmail()],
+                [
+                    'name'     => $faker->name(),
+                    'password' => Hash::make('Admin123'),
+                    'role'     => $faker->randomElement(['admin', 'petugas']),
+                ]
+            );
         }
     }
 }

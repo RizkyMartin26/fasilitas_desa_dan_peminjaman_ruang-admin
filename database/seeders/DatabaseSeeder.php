@@ -5,16 +5,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-
         $this->call([
-           CreateUserSeeder::class,
-            CreateWargaSeeder::class,
-            CreateKeluargaKKSeeder::class,
-            CreateAnggotaKeluargaSeeder::class,
-            CreatePeristiwaKelahiranSeeder::class,
-
+            UserSeeder::class,
+            WargaSeeder::class,
+            FasilitasUmumSeeder::class,
+            SyaratFasilitasSeeder::class,
+            PeminjamanFasilitasSeeder::class,
+            PembayaranFasilitasSeeder::class,
+            PetugasFasilitasSeeder::class,
         ]);
     }
 }

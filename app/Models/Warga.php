@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Warga extends Model
 {
@@ -11,14 +11,21 @@ class Warga extends Model
     protected $primaryKey = 'warga_id';
 
     protected $fillable = [
-        'no_ktp', 'nama', 'jenis_kelamin', 'agama',
-        'pekerjaan', 'telp', 'email'
+        'no_ktp',
+        'nama',
+        'jenis_kelamin',
+        'agama',
+        'pekerjaan',
+        'telp',
+        'email',
     ];
 
     /* 🔍 SEARCH GLOBAL */
     public function scopeSearch(Builder $query, $keyword): Builder
     {
-        if (!$keyword) return $query;
+        if (! $keyword) {
+            return $query;
+        }
 
         return $query->where(function ($q) use ($keyword) {
             $q->where('nama', 'like', "%$keyword%")
@@ -30,15 +37,15 @@ class Warga extends Model
     /* 🔽 FILTER DINAMIS */
     public function scopeFilter(Builder $query, array $filters): Builder
     {
-        if (!empty($filters['jenis_kelamin']) && $filters['jenis_kelamin'] !== 'all') {
+        if (! empty($filters['jenis_kelamin']) && $filters['jenis_kelamin'] !== 'all') {
             $query->where('jenis_kelamin', $filters['jenis_kelamin']);
         }
 
-        if (!empty($filters['agama']) && $filters['agama'] !== 'all') {
+        if (! empty($filters['agama']) && $filters['agama'] !== 'all') {
             $query->where('agama', $filters['agama']);
         }
 
-        if (!empty($filters['pekerjaan']) && $filters['pekerjaan'] !== 'all') {
+        if (! empty($filters['pekerjaan']) && $filters['pekerjaan'] !== 'all') {
             $query->where('pekerjaan', $filters['pekerjaan']);
         }
 

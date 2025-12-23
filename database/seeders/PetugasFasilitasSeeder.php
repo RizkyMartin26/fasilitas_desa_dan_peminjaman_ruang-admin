@@ -1,36 +1,39 @@
 <?php
+
 namespace Database\Seeders;
 
-use App\Models\FasilitasUmum;
-use App\Models\PetugasFasilitas;
-use App\Models\Warga;
 use Illuminate\Database\Seeder;
+use App\Models\PetugasFasilitas;
+use App\Models\FasilitasUmum;
+use App\Models\Warga;
 
 class PetugasFasilitasSeeder extends Seeder
 {
     public function run(): void
     {
-        $peranPetugas = [
-            'Penanggung Jawab',
-            'Pengelola',
-            'Petugas Kebersihan',
-            'Petugas Keamanan',
-            'Koordinator',
-        ];
-
+        // Ambil ID yang valid (sesuai controller: exists)
         $fasilitasIds = FasilitasUmum::pluck('fasilitas_id')->toArray();
         $wargaIds     = Warga::pluck('warga_id')->toArray();
 
-        // Cegah error jika data kosong
+        // Pengaman kalau data induk belum ada
         if (empty($fasilitasIds) || empty($wargaIds)) {
             return;
         }
 
+        $daftarPeran = [
+            'Penanggung Jawab',
+            'Petugas Kebersihan',
+            'Petugas Keamanan',
+            'Pengelola Fasilitas',
+            'Petugas Lapangan',
+        ];
+
+        // 🔁 Buat 20 data petugas fasilitas
         for ($i = 1; $i <= 20; $i++) {
             PetugasFasilitas::create([
                 'fasilitas_id'     => $fasilitasIds[array_rand($fasilitasIds)],
                 'petugas_warga_id' => $wargaIds[array_rand($wargaIds)],
-                'peran'            => $peranPetugas[array_rand($peranPetugas)],
+                'peran'            => $daftarPeran[array_rand($daftarPeran)],
             ]);
         }
     }

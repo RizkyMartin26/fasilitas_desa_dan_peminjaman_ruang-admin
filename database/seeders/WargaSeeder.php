@@ -1,41 +1,32 @@
 <?php
+
 namespace Database\Seeders;
 
-use App\Models\Warga;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class WargaSeeder extends Seeder
 {
     public function run(): void
     {
-        $agamaList = [
-            'Islam',
-            'Kristen',
-            'Katolik',
-            'Hindu',
-            'Buddha',
-            'Konghucu',
-        ];
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('warga')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $pekerjaanList = [
-            'Petani',
-            'Pedagang',
-            'Pegawai Negeri',
-            'Karyawan Swasta',
-            'Wiraswasta',
-            'Pelajar',
-            'Ibu Rumah Tangga',
-        ];
+        for ($i = 1; $i <= 10; $i++) {
 
-        for ($i = 1; $i <= 20; $i++) {
-            Warga::create([
-                'no_ktp'        => '3201010101010' . str_pad($i, 2, '0', STR_PAD_LEFT),
-                'nama'          => 'Warga Desa ' . $i,
-                'jenis_kelamin' => $i % 2 === 0 ? 'Perempuan' : 'Laki-laki',
-                'agama'         => $agamaList[array_rand($agamaList)],
-                'pekerjaan'     => $pekerjaanList[array_rand($pekerjaanList)],
-                'telp'          => '08' . rand(1111111111, 9999999999),
-                'email'         => 'warga' . $i . '@desa.test',
+            $noKtp = '320101' . str_pad($i, 10, '0', STR_PAD_LEFT);
+
+            DB::table('warga')->insert([
+                'no_ktp' => $noKtp,
+                'nama' => 'Warga ' . $i,
+                'jenis_kelamin' => $i % 2 === 0 ? 'L' : 'P',
+                'agama' => 'Islam',
+                'pekerjaan' => 'Petani',
+                'telp' => '081234567' . str_pad($i, 2, '0', STR_PAD_LEFT),
+                'email' => 'warga' . $i . '@gmail.com',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
