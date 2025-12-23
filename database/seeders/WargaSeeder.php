@@ -1,33 +1,41 @@
 <?php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Warga;
-use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class WargaSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = Faker::create('id_ID');
-
-        $agama = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu'];
-        $pekerjaan = [
-            'Petani', 'Guru', 'Karyawan', 'Wiraswasta',
-            'Nelayan', 'Pedagang', 'Mahasiswa', 'Ibu Rumah Tangga'
+        $agamaList = [
+            'Islam',
+            'Kristen',
+            'Katolik',
+            'Hindu',
+            'Buddha',
+            'Konghucu',
         ];
 
-        for ($i = 0; $i < 100; $i++) {
+        $pekerjaanList = [
+            'Petani',
+            'Pedagang',
+            'Pegawai Negeri',
+            'Karyawan Swasta',
+            'Wiraswasta',
+            'Pelajar',
+            'Ibu Rumah Tangga',
+        ];
 
+        for ($i = 1; $i <= 20; $i++) {
             Warga::create([
-                'no_ktp'        => $faker->nik(),
-                'nama'          => $faker->name(),
-                'jenis_kelamin' => $faker->randomElement(['L', 'P']),
-                'agama'         => $faker->randomElement($agama),
-                'pekerjaan'     => $faker->randomElement($pekerjaan),
-                'telp'          => $faker->phoneNumber(),
-                'email'         => $faker->unique()->safeEmail(),
+                'no_ktp'        => '3201010101010' . str_pad($i, 2, '0', STR_PAD_LEFT),
+                'nama'          => 'Warga Desa ' . $i,
+                'jenis_kelamin' => $i % 2 === 0 ? 'Perempuan' : 'Laki-laki',
+                'agama'         => $agamaList[array_rand($agamaList)],
+                'pekerjaan'     => $pekerjaanList[array_rand($pekerjaanList)],
+                'telp'          => '08' . rand(1111111111, 9999999999),
+                'email'         => 'warga' . $i . '@desa.test',
             ]);
         }
     }
